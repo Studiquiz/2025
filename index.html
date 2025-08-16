@@ -1,1 +1,125 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uni Quiz Einstieg</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hinweis-fehler {
+      color: red;
+      font-size: 0.9em;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <h1>Willkommen zum Studiquiz</h1>
 
+    <p>Im Rahmen eines universitären Forschungsprojekts soll dieses Quiz Einblicke in das allgemeine Technikverständnis sowie den Umgang mit typischen Konzepten aus der Informatik, etwa Programmiersprachen oder digitalen Tools, geben. Es umfasst 12 Fragen und dauert ca. 3 bis 5 Minuten.</p>
+    
+    <p class="hinweis"><strong>Hinweis:</strong> Bitte verwende keinen privaten / Inkognito-Modus, da deine Daten sonst nicht gespeichert werden können. Bitte führe das Quiz außerdem maximal einmal auf einem Gerät aus.</p>
+
+    <form id="quizForm">
+      <label for="kuerzel">Bitte gib dein Pseudonym ein:</label>
+      <input type="text" id="kuerzel" name="kuerzel" placeholder="z.B. AB12" required autocomplete="off" />
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="agbCheck" />
+        <label for="agbCheck">
+          Ich habe die <a href="#" id="openAGB">AGB gelesen</a>
+        </label>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="datenschutzCheck" />
+        <label for="datenschutzCheck">
+          Ich habe die <a href="#" id="openDatenschutz">Datenschutzerklärung gelesen</a>
+        </label>
+      </div>
+
+      <button type="submit" id="startBtn" disabled>Zum Quiz</button>
+    </form>
+  </main>
+
+  <!-- AGB Modal -->
+  <div id="agbModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="agbTitle">
+    <div class="modal-content scrollable">
+      <button id="closeAGBModal" class="close" aria-label="AGB schließen">&times;</button>
+      <h2 id="agbTitle">Allgemeine Geschäftsbedingungen (AGB)</h2>
+      <!-- Unveränderter Text -->
+      <div class="modal-text">
+      <p><strong>1. Geltungsbereich</strong></p>
+      <p>Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für die Nutzung des Online-Quiz „Studiquiz“, bereitgestellt zu Studien- und Forschungszwecken. Die Teilnahme ist freiwillig.</p>
+      <p><strong>2. Teilnahmebedingungen</strong></p>
+      <p>Teilnehmen dürfen alle Personen, die das Quiz aufrufen und das Pseudonymfeld ausfüllen. Es besteht keine Verpflichtung zur Angabe personenbezogener Daten. Die Angabe des Pseudonyms ist erforderlich, um die Bonuspunktevergabe zu ermöglichen, wobei dieses Pseudonym bei Analyse der Daten nicht mit den tatsächlichen Identitäten der Teilnehmenden verknüpft wird.</p>
+      <p><strong>3. Zweck des Quiz</strong></p>
+      <p>Das Quiz dient der Erhebung anonymisierter Nutzungs- und Antwortdaten für wissenschaftliche Zwecke. Es werden keine individuellen Bewertungen erstellt, keine personenbezogenen Rückschlüsse gezogen und keine kommerziellen Absichten verfolgt.</p>
+      <p><strong>4. Freiwillige Datenübermittlung</strong></p>
+      <p>Am Ende des Quiz besteht die Möglichkeit, eine CSV-Datei mit den eigenen Antworten und begleitenden Daten herunterzuladen. Die Weitergabe oder der Upload dieser Datei (z. B. auf eCampus oder andere Plattformen) ist freiwillig. Eine Übermittlung ist nur dann erforderlich, wenn die Teilnehmenden ausdrücklich mit der Auswertung ihrer Daten einverstanden sind. Ohne diese Übermittlung werden keine Daten vom Server verarbeitet oder gespeichert.</p>
+      <p><strong>5. Datennutzung und Anonymisierung</strong></p>
+      <p>Die erfassten Daten, einschließlich Quizantworten, Verweildauer auf Seiten, Klickverhalten, Modalöffnungen und Navigationsverläufen, werden ausschließlich anonymisiert gespeichert und analysiert. Vor der Auswertung wird das Pseudonym vollständig entfernt und somit eine nachträgliche Identifikation technisch verhindert. Weitere Informationen zur Datenverarbeitung finden Sie in der Datenschutzerklärung.</p>
+      <p><strong>6. Haftungsausschluss</strong></p>
+      <p>Für technische Störungen, Datenverluste oder fehlerhafte Darstellungen übernimmt der Anbieter keine Haftung. Die Teilnahme erfolgt auf eigenes Risiko.</p>
+      <p><strong>7. Änderung der AGB</strong></p>
+      <p>Diese AGB können jederzeit angepasst werden. Die jeweils aktuelle Version ist beim Einstieg in das Quiz einsehbar. Mit der Nutzung des Quiz erklärt sich die teilnehmende Person mit der jeweils gültigen Version einverstanden.</p>
+      <p><strong>8. Kontakt</strong></p>
+      <p>Für Rückfragen oder Anliegen zur Teilnahme und Datennutzung kann über die Email s6cestar@uni-bonn.de Kontakt aufgenommen werden.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Datenschutz Modal -->
+  <div id="datenschutzModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dsTitle">
+  <div class="modal-content scrollable">
+    <button id="closeDatenschutzModal" class="close" aria-label="Datenschutz schließen">&times;</button>
+    <h2 id="dsTitle">Datenschutzerklärung</h2>
+    <div class="modal-text">
+      <p><strong>1. Verantwortlicher und Kontakt</strong></p>
+      <p>Verantwortlich für dieses Quiz ist: s6cestar@uni-bonn.de.</p>
+      <p>Fragen zum Datenschutz können an folgenden E-Mail-Adressen gerichtet werden: ortloff@cs.uni-bonn.de und s6cestar@uni-bonn.de .</p>
+      <p><strong>2. Arten der verarbeiteten Daten</strong></p>
+      <p>Dieses Quiz wird vollständig lokal im Browser ausgeführt. Es findet unsererseits keine aktive Datenübertragung an einen Server statt. Im Rahmen der Nutzung können folgende Informationen lokal gespeichert werden:</p>
+      <ul>
+        <li>Antworten auf die Quizfragen</li>
+        <li>Ein frei wählbares Pseudonym</li>
+        <li>Interaktionsverhalten mit einzelnen Elementen (z. B. Navigation, Modaleinblendungen)</li>
+        <li>Zustimmungsinformationen zu rechtlichen Hinweisen</li>
+        <li>Dauer zur Beantwortung einzelner Fragen</li>
+        <li>Freitextantworten</li>
+      </ul>
+
+      <p><strong>3. Zweck der Verarbeitung & Umgang</strong></p>
+      <p>Die Verarbeitung erfolgt zur Durchführung einer anonymisierten Auswertung zu wissenschaftlichen Zwecken. Ziel ist es, das technische Nutzungsverhalten und Antwortmuster zu untersuchen. Pseudonyme werden vor der Analyse entfernt. Eine Rückverfolgung auf Einzelpersonen erfolgt nicht. Forscher und Kursteilnehmer haben nur dann Zugang zu diesen Daten, wenn sie sich bereit erklären, die Vertraulichkeit der Daten zu wahren, und wenn sie den in diesem Dokument genannten Bedingungen zustimmen. In der Veröffentlichung oder Präsentation der Studie werden keine identifizierenden Informationen genannt.</p>
+
+      <p><strong>4. Kein Tracking, keine zentrale Speicherung</strong></p>
+      <p>IP-Adressen, Gerätekennungen oder andere Metadaten werden unsererseits nicht erhoben oder gespeichert. Siehe jedoch Github-Hosting für weitere Informationen.</p>
+
+      <p><strong>5. Optionale Datenweitergabe durch CSV-Export</strong></p>
+      <p>Nach Abschluss des Quiz kann auf Wunsch eine CSV-Datei mit den lokal gespeicherten Daten heruntergeladen werden. Diese Datei wird nicht automatisch versendet. Nur durch einen manuellen Upload (z. B. auf eCampus) erfolgt eine Weitergabe.</p>
+      <p>Mit dem freiwilligen Upload wird die Zustimmung zur anonymisierten Auswertung erteilt. Ohne Upload verbleiben alle Daten ausschließlich lokal. Nach einem Upload werden die Daten sowohl für die Lehre als auch für die Forschung verwendet. Wenn dir das bewusst ist, gib bitte bei der ersten Frage das Wort Eis ein.</p>
+
+      <p><strong>6. GitHub-Hosting</strong></p>
+      <p>Diese Website wird über GitHub Pages gehostet (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim Aufruf der Seite kann GitHub technische Zugriffsdaten wie IP-Adresse oder Zeitstempel verarbeiten. Diese Verarbeitung erfolgt unabhängig vom Quiz und liegt außerhalb unseres Einflussbereichs.</p>
+      <p>Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a></p>
+
+      <p><strong>7. Speicherdauer und Kontrolle</strong></p>
+      <p>Alle Daten verbleiben im lokalen Speicher Ihres Browsers und können dort jederzeit manuell gelöscht werden. Eine Speicherung findet vor Hochladen der CSV-Datei nicht statt. Die Daten werden in verschlüsselter Form gespeichert. Nach Hochladen der CSV-Datei kann durch Kontaktaufnahme jederzeit eine Löschung der Daten beantragt werden.</p>
+
+      <p><strong>8. Rechte der Nutzerinnen und Nutzer</strong></p>
+      <p>Es bestehen klassische Auskunfts- oder Löschansprüche. Die volle Kontrolle über die lokal gespeicherten Daten liegt bei Ihnen. Sie können diese jederzeit im Browser löschen oder den Export vermeiden.</p>
+
+      <p><strong>9. Keine Weitergabe an Dritte</strong></p>
+      <p>Die unsererseits gespeicherten oder exportierten Daten werden ausschließlich für wissenschaftliche Zwecke verwendet. Eine Weitergabe an Dritte oder kommerzielle Nutzung erfolgt nicht.</p>
+
+      <p><strong>10. Rechtsgrundlage</strong></p>
+      <p>Die Nutzung des Quiz und die freiwillige Weitergabe von Daten durch Export beruhen auf informierter Zustimmung. Es findet keine Erhebung personenbezogener Daten statt, daher ist keine zusätzliche Rechtsgrundlage erforderlich.</p>
+    </div>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
