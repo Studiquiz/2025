@@ -16,27 +16,27 @@
 </head>
 <body>
   <main class="container" role="main">
-    <h1>Willkommen zum Studiquiz</h1>
+    <h1>Welcome to the student quiz</h1>
 
-    <p>Im Rahmen eines universitären Forschungsprojekts soll dieses Quiz Einblicke in das allgemeine Technikverständnis sowie den Umgang mit typischen Konzepten aus der Informatik, etwa Programmiersprachen oder digitalen Tools, geben. Es umfasst 12 Fragen und dauert ca. 3 bis 5 Minuten.</p>
+    <p>As part of a university research project, this quiz aims to provide insights into students' general understanding of technology and online behavior. It consists of xy questions and takes approximately 5 to 10 minutes to complete.</p>
     
-    <p class="hinweis"><strong>Hinweis:</strong> Bitte verwende keinen privaten / Inkognito-Modus, da deine Daten sonst nicht gespeichert werden können. Bitte führe das Quiz außerdem maximal einmal auf einem Gerät aus.</p>
+    <p class="hinweis"><strong>Important:</strong> Please do not use private/incognito mode, as this will prevent your data from being saved. Please also only take this quiz once on a device.</p>
 
     <form id="quizForm">
-      <label for="kuerzel">Bitte gib dein Pseudonym ein:</label>
-      <input type="text" id="kuerzel" name="kuerzel" placeholder="z.B. AB12" required autocomplete="off" />
+      <label for="kuerzel">Please select your field of study:</label>
+      <input type="text" id="kuerzel" name="kuerzel" placeholder="z.B. Muss ich noch ändern" required autocomplete="off" />
 
       <div class="checkbox-group">
         <input type="checkbox" id="agbCheck" />
         <label for="agbCheck">
-          Ich habe die <a href="#" id="openAGB">AGB gelesen</a>
+          I read the <a href="#" id="openAGB">terms and conditions </a>
         </label>
       </div>
 
       <div class="checkbox-group">
         <input type="checkbox" id="datenschutzCheck" />
         <label for="datenschutzCheck">
-          Ich habe die <a href="#" id="openDatenschutz">Datenschutzerklärung gelesen</a>
+          I read the<a href="#" id="openDatenschutz">privacy policy</a>
         </label>
       </div>
 
@@ -48,7 +48,7 @@
   <div id="agbModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="agbTitle">
     <div class="modal-content scrollable">
       <button id="closeAGBModal" class="close" aria-label="AGB schließen">&times;</button>
-      <h2 id="agbTitle">Allgemeine Geschäftsbedingungen (AGB)</h2>
+      <h2 id="agbTitle">Terms and conditions (AGB)</h2>
       <!-- Unveränderter Text -->
       <div class="modal-text">
       <p><strong>1. Geltungsbereich</strong></p>
@@ -75,7 +75,7 @@
   <div id="datenschutzModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dsTitle">
   <div class="modal-content scrollable">
     <button id="closeDatenschutzModal" class="close" aria-label="Datenschutz schließen">&times;</button>
-    <h2 id="dsTitle">Datenschutzerklärung</h2>
+    <h2 id="dsTitle">Privacy policy</h2>
     <div class="modal-text">
       <p><strong>1. Verantwortlicher und Kontakt</strong></p>
       <p>Verantwortlich für dieses Quiz ist: s6cestar@uni-bonn.de.</p>
