@@ -12,58 +12,50 @@
     <div id="frageContainer"></div>
 
     <div class="navigation">
-      <button id="zurueck">Zurück</button>
-      <button id="weiter">Weiter</button>
-      <button id="abschliessen" class="hidden">Abschließen</button>
+      <button id="zurueck">Back</button>
+      <button id="weiter">Continue</button>
+      <button id="abschliessen" class="hidden">Finish</button>
     </div>
 
     <div id="dankeContainer" class="hidden">
-      <h2>Vielen Dank für deine Teilnahme!</h2>
+      <h2>Thank you for participating!</h2>
 
       <p>
-        Dieses „Quiz“ diente <strong>nicht der inhaltlichen Beurteilung deiner Antworten</strong>,
-        sondern war Teil einer wissenschaftlichen Untersuchung zum Verhalten im Umgang mit rechtlichen Hinweisen,
-        insbesondere der <strong>Datenschutzerklärung</strong> und den <strong>AGB</strong>.
+        This "quiz" was <strong>not intended to assess the content of your answers,</strong>
+        but was part of a scientific study on behavior when dealing with legal notices,
+        in particular the <strong>privacy policy</strong> and the <strong>terms and conditions</strong>.
       </p>
 
-      <p>Die eigentliche Fragestellung der Studie bezog sich auf:</p>
+      <p>The actual research question of the study was:</p>
       <ul>
-        <li>ob und wie lange die Hinweise gelesen wurden,</li>
-        <li>welche Inhalte beachtet oder übersprungen wurden,</li>
-        <li>und ob das Einverständnis bewusst gegeben wurde.</li>
+      <li>whether and for how long the instructions were read,</li>
+      <li>which content was observed or skipped,</li>
+      <li>and whether consent was given consciously.</li>
       </ul>
-
+      
       <p>
-        Aus methodischen Gründen wurde diese Zielsetzung zunächst nicht offen kommuniziert.
-        Wir möchten dich daher nun vollständig aufklären.
-      </p>
-
-      <p>
-        Die Teilnahme an dieser Studie ist <strong>freiwillig</strong>.
-        Du kannst auch jetzt noch ohne Angabe von Gründen zurücktreten.
-        In diesem Fall musst du die CSV-Datei <strong>nicht hochladen</strong>.
+      For methodological reasons, this objective was not initially communicated openly.
+      We would therefore like to fully inform you now.
       </p>
       
       <p>
-        Wenn du <strong>mit der Auswertung einverstanden</strong> bist, kannst du die Datei nun hier herunterladen. Vielen Dank!
+      Participation in this study is voluntary.
+      You can withdraw at any time without giving a reason.
+      In this case, <strong>you do not need to upload the CSV file</strong>.
+      </p>
+      
+      <p>
+        If you <strong>agree with the evaluation</strong>, you can now download the file here. Thank you very much!
       </p>
 
-      <button id="csvDownloadBtn">CSV herunterladen</button>
-
+      <button id="csvDownloadBtn">CSV Download</button>
+      <!-- hier muss noch die Website hin, evtl Qualtrics oder so, aber unsicher, ob geht, weil nur noch 1 acc -->
       <p>
-        Die CSV-Datei kannst du auf folgender Seite hochladen:<br>
+        You can upload the CSV file on the following page:<br>
         <a href="https://ecampus.uni-bonn.de/ilias.php?baseClass=ilexercisehandlergui&cmdNode=cn:nq&cmdClass=ilObjExerciseGUI&cmd=showOverview&ref_id=3808197" target="_blank" rel="noopener">
-          ➜ Zur Upload-Seite (eCampus)
+          ➜ upload page (tbd) 
         </a>
       </p>
-      
-      <p>Wenn du <strong>nicht möchtest, dass deine Daten ausgewertet werden</strong>, aber trotzdem deine Bonuspunkte erhalten möchtest, dann:</p>
-      <ul>
-        <li>lade die CSV-Datei ohne Einverständnis herunter,</li>
-        <li>und lade die Datei dann wie gewohnt hoch.</li>
-      </ul>
-
-      <button id="csvDownloadNoConsentBtn">CSV herunterladen ohne Einverständnis</button>
       
     </div>
   </div>
@@ -71,64 +63,109 @@
   <script>
     const fragen = [
       {
-        frage: "Welches Betriebssystem nutzt du hauptsächlich?",
+        frage: "If you own a PC/Laptop: What OS(Operating System) do you primarily use?",
         antworten: null,
         mehrfach: false,
         typ: "text"
       },
       {
-        frage: "Wie würdest du deine technische Affinität einschätzen?",
-        antworten: ["Sehr hoch — ich programmiere regelmäßig und kenne mich gut mit Systemen aus", "Hoch — ich habe grundlegende Kenntnisse und Interesse an Technik", "Mittel — ich nutze Technik, aber ohne tiefere Kenntnisse", "Gering — ich nutze Technik nur bei Bedarf"],
+        frage: "How would you estimate your technical affinity?",
+        antworten: ["Very high (I program regularly and am well-versed in systems)" "High (I have basic knowledge and interest in technology)" "Medium (I use technology but without in-depth knowledge)" "Low (I use technology only when necessary)"],
         mehrfach: false
       },
       {
-        frage: "Welche dieser Programmiersprachen hast du bereits verwendet? (Mehrfachauswahl möglich)",
-        antworten: ["Python", "Java", "C/C++", "JavaScript", "Keine davon"],
+        frage: "How did you gain your technical experience? (Multiple selection possible)",
+        antworten: ["Work (technical field)", "Work (not in a technical field)", "Hobbies", "Media", "None of the above."],
         mehrfach: true
       },
       {
-        frage: "Welche dieser Tools oder Umgebungen sind dir bekannt? (Mehrfachauswahl möglich)",
-        antworten: ["Git / GitHub", "Docker", "Visual Studio Code", "Linux-Terminal (z.B. Bash)", "Keine davon"],
+        frage: "Have you already worked or studied in one of these subject areas: engineering, computer science, data science, maths, physics",
+        antworten: ["Yes", "No", "No answer"],
         mehrfach: true
       },
-      {
-        frage: "Hast du schon einmal ein eigenes Softwareprojekt umgesetzt (z.B. App, Website, Script)?",
-        antworten: ["Ja - mehrere Male", "Ja - einmal", "Nur im Rahmen von Lehrveranstaltungen", "Nein - noch nicht"],
+      { 
+        frage: "In the following, a number of statements concerning personal attitudes and traits is listed. Read each item and decide if it is true or false: If I knew I wouldn’t get caught, I would use pirated software",
+        antworten: ["True", "False"],
         mehrfach: false
       },
       {
-        frage: "Wie häufig arbeitest du mit der Kommandozeile / dem Terminal?",
-        antworten: ["Täglich", "Wöchentlich", "Selten", "Nie"],
+        frage: "If I knew I wouldn’t get caught, I would watch movies illegally)",
+        antworten: ["True", "False"],
         mehrfach: false
       },
       {
-        frage: "Was ist dir bei einem technischen Tool oder Interface am wichtigsten?",
-        antworten: ["Intuitive Bedienung", "Funktionsumfang", "Performance", "Design / Ästhetik", "Andere Kriterien"],
+        frage: "I only use secure passwords (passwords that are long and complex)",
+        antworten: ["True", "False"],
         mehrfach: false
       },
       {
-        frage: "Wie gut kennst du dich mit Netzwerktechnologien (z. B. IP, DNS, HTTP) aus?",
-        antworten: ["Sehr gut — ich verstehe Konzepte und kann sie anwenden", "Grundlegend — ich kenne die Begriffe und habe sie gehört", "Kaum — ich habe wenig bis keine Kenntnisse"],
+        frage: "I never reuse passwords (I use different passwords for all my accounts)",
+        antworten: ["True", "False"],
         mehrfach: false
       },
       {
-        frage: "Hast du schon einmal eine Datenbank genutzt oder aufgebaut?",
-        antworten: ["Ja - selbstständig in Projekten", "Ja - im Rahmen von Kursen(z.B. in der Schule/universität)", "Ja - im Rahmen einer beruflichen Tätigkeit", "Nein - noch nicht"],
+        frage: "I always encrypt e-mails containing personal data",
+        antworten: ["True", "False"],
         mehrfach: false
       },
       {
-        frage: "Bist du mit traditioneller und agiler Softwareentwicklung bekannt?",
-        antworten: ["Ja - ich habe beide Methoden bereits umgesetzt", "Teilweise - ich habe eine Methode umgesetzt ", "Teilweise - ich habe von einer oder beiden Methoden gehört", "Nein"],
+        frage: "I am always aware of what personal data is collected by the platforms I use and how it is used",
+        antworten: ["True", "False"],
         mehrfach: false
       },
       {
-        frage: "Wie häufig liest du technische Dokumentation oder Tutorials?",
-        antworten: ["Regelmäßig — ich informiere mich oft über neue Tools und Frameworks", "Gelegentlich — nur bei konkreten Problemen", "Gar nicht"],
+        frage: "I always read the privacy policy before giving an app/application access to my personal data",
+        antworten: ["True", "False"],
         mehrfach: false
       },
       {
-        frage: "Wie informierst du dich über technologische Entwicklungen?",
-        antworten: ["Fachseiten/ YouTube/ Foren", "Austausch mit Kommilitonen/ Lehrveranstaltungen", "Ich informiere mich selten darüber"],
+        frage: "I always read the privacy policy completely before I agree to them",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I always read the terms and conditions completely before I agree to them",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I am always just as polite online as I am in the real world",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "There have been occasions when I felt like smashing a computer",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I am never annoyed if people ask me to help them with their computers",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I have never considered posting a troll-comment",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I have never read somebody else’s messages without explicit permission",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I have never looked at someone else’s screen without their permission",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I never ignore security warnings on my computer",
+        antworten: ["True", "False"],
+        mehrfach: false
+      },
+      {
+        frage: "I never ignore software update reminders",
+        antworten: ["True", "False"],
         mehrfach: false
       }
     ];
