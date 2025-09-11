@@ -187,8 +187,11 @@
     const dankeContainer = document.getElementById("dankeContainer");
   
     let daten = JSON.parse(localStorage.getItem("uniQuizDaten")) || {};
-    if (!daten.quizAntworten) daten.quizAntworten = [];
-  
+    if (!daten.quizAntworten) {
+      daten.quizAntworten = [];
+      localStorage.setItem("uniQuizDaten", JSON.stringify(daten)); // <-- hinzufügen
+    }
+
     // --- Frage anzeigen ---
     function zeigeFrage() {
       const f = fragen[aktuelleFrage];
