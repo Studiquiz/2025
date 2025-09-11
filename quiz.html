@@ -190,65 +190,66 @@
       const pseudonym = daten.kuerzel || "Kein Pseudonym gefunden";
       if (!daten.quizAntworten) daten.quizAntworten = [];
   
-  function zeigeFrage() {
-    const f = fragen[aktuelleFrage];
-  
-    if (aktuelleFrage === 0) {
-      frageContainer.innerHTML = `
-        <p><strong>${f.frage}</strong></p>
-        <p>Frage 1 von ${fragen.length}</p>
-        <input type="text" id="freitextAntwort" maxlength="30" placeholder="Antwort eingeben..." style="width: 100%; padding: 0.5em;" />
-      `;
-  
-      const vorherigeAntwort = daten.quizAntworten[0];
-      if (vorherigeAntwort) {
-        document.getElementById("freitextAntwort").value = vorherigeAntwort;
-      }
-    } else {
-      frageContainer.innerHTML = `
-        <p><strong>${f.frage}</strong></p>
-        <p>Frage ${aktuelleFrage + 1} von ${fragen.length}</p>
-        ` +
-        f.antworten.map((antwort, i) => `
-          <div><input type="${f.mehrfach ? 'checkbox' : 'radio'}" name="antwort" id="a${i}" value="${antwort}">
-          <label for="a${i}">${antwort}</label></div>
-        `).join('');
-  
-      const vorherigeAntwort = daten.quizAntworten[aktuelleFrage];
-      if (vorherigeAntwort) {
-        if (Array.isArray(vorherigeAntwort)) {
-          vorherigeAntwort.forEach(a => {
-            const input = document.querySelector(`input[value='${a}']`);
-            if (input) input.checked = true;
-          });
+      function zeigeFrage() {
+        const f = fragen[aktuelleFrage];
+      
+        if (aktuelleFrage === 0) {
+          frageContainer.innerHTML = `
+            <p><strong>${f.frage}</strong></p>
+            <p>Frage 1 von ${fragen.length}</p>
+            <input type="text" id="freitextAntwort" maxlength="30" placeholder="Antwort eingeben..." style="width: 100%; padding: 0.5em;" />
+          `;
+      
+          const vorherigeAntwort = daten.quizAntworten[0];
+          if (vorherigeAntwort) {
+            document.getElementById("freitextAntwort").value = vorherigeAntwort;
+          }
         } else {
-          const input = document.querySelector(`input[value='${vorherigeAntwort}']`);
-          if (input) input.checked = true;
+          frageContainer.innerHTML = `
+            <p><strong>${f.frage}</strong></p>
+            <p>Frage ${aktuelleFrage + 1} von ${fragen.length}</p>
+            ` +
+            f.antworten.map((antwort, i) => `
+              <div><input type="${f.mehrfach ? 'checkbox' : 'radio'}" name="antwort" id="a${i}" value="${antwort}">
+              <label for="a${i}">${antwort}</label></div>
+            `).join('');
+      
+          const vorherigeAntwort = daten.quizAntworten[aktuelleFrage];
+          if (vorherigeAntwort) {
+            if (Array.isArray(vorherigeAntwort)) {
+              vorherigeAntwort.forEach(a => {
+                const input = document.querySelector(`input[value='${a}']`);
+                if (input) input.checked = true;
+              });
+            } else {
+              const input = document.querySelector(`input[value='${vorherigeAntwort}']`);
+              if (input) input.checked = true;
+            }
+          }
         }
+      
+        zurueck.disabled = aktuelleFrage === 0;
+        weiter.classList.toggle("hidden", aktuelleFrage === fragen.length - 1);
+        abschliessen.classList.toggle("hidden", aktuelleFrage !== fragen.length - 1);
       }
-    }
   
-    zurueck.disabled = aktuelleFrage === 0;
-    weiter.classList.toggle("hidden", aktuelleFrage === fragen.length - 1);
-    abschliessen.classList.toggle("hidden", aktuelleFrage !== fragen.length - 1);
-  }
-  
-  function speichereAntwort() {
-    const f = fragen[aktuelleFrage];
-    let antwort;
-  
-    if (aktuelleFrage === 0) {
-      antwort = document.getElementById("freitextAntwort").value.trim();
-    } else if (f.mehrfach) {
-      antwort = Array.from(document.querySelectorAll("input[name='antwort']:checked")).map(i => i.value);
-    } else {
-      const selected = document.querySelector("input[name='antwort']:checked");
-      antwort = selected ? selected.value : null;
-    }
-  
-    daten.quizAntworten[aktuelleFrage] = antwort;
-    localStorage.setItem("uniQuizDaten", JSON.stringify(daten));
-  }
+      function speichereAntwort() {
+        const f = fragen[aktuelleFrage];
+        let antwort;
+      
+        if (aktuelleFrage === 0) {
+          antwort = document.getElementById("freitextAntwort").value.trim();
+        } else if (f.mehrfach) {
+          antwort = Array.from(document.querySelectorAll("input[name='antwort']:checked")).map(i => i.value);
+        } else {
+          const selected = document.querySelector("input[name='antwort']:checked");
+          antwort = selected ? selected.value : null;
+        }
+      
+        daten.quizAntworten[aktuelleFrage] = antwort;
+        localStorage.setItem("uniQuizDaten", JSON.stringify(daten));
+      }
+      
       zurueck.addEventListener("click", () => {
         speichereAntwort();
         if (aktuelleFrage > 0) {
@@ -264,6 +265,9 @@
           zeigeFrage();
         }
       });
+
+      // Start: erste Frage anzeigen
+      zeigeFrage();
   
       abschliessen.addEventListener("click", () => {
         speichereAntwort(); // Letzte Antwort sichern
@@ -316,8 +320,6 @@
         document.body.removeChild(link);
       });
   
-      // Start: erste Frage anzeigen
-      zeigeFrage();
      });
     
   </script>
