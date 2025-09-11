@@ -24,7 +24,16 @@
 
     <form id="quizForm">
       <label for="kuerzel">Please select your field of study:</label>
-      <input type="text" id="kuerzel" name="kuerzel" placeholder="z.B. Muss ich noch ändern" required autocomplete="off" />
+      <select id="kuerzel" name="kuerzel" required>
+        <option value="" disabled selected>-- Select your field of study --</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Economics">Economics</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Psychology">Psychology</option>
+        <option value="Law">Law</option>
+        <option value="Medicine">Medicine</option>
+        <option value="Other">Other</option>
+      </select>
 
       <div class="checkbox-group">
         <input type="checkbox" id="agbCheck" />
