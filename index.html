@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Uni Quiz Einstieg</title>
+  <title>Student quiz</title>
   <link rel="stylesheet" href="style.css">
   <style>
     .hinweis-fehler {
@@ -40,85 +40,85 @@
         </label>
       </div>
 
-      <button type="submit" id="startBtn" disabled>Zum Quiz</button>
+      <button type="submit" id="startBtn" disabled>Start</button>
     </form>
   </main>
 
-  <!-- AGB Modal -->
+  <!-- Terms and Conditions Modal -->
   <div id="agbModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="agbTitle">
     <div class="modal-content scrollable">
-      <button id="closeAGBModal" class="close" aria-label="AGB schließen">&times;</button>
-      <h2 id="agbTitle">Terms and conditions (AGB)</h2>
-      <!-- Unveränderter Text -->
+      <button id="closeAGBModal" class="close" aria-label="Close Terms and Conditions">&times;</button>
+      <h2 id="agbTitle">Terms and Conditions (AGB)</h2>
+      <!-- Unchanged Text -->
       <div class="modal-text">
-      <p><strong>1. Geltungsbereich</strong></p>
-      <p>Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für die Nutzung des Online-Quiz „Studiquiz“, bereitgestellt zu Studien- und Forschungszwecken. Die Teilnahme ist freiwillig.</p>
-      <p><strong>2. Teilnahmebedingungen</strong></p>
-      <p>Teilnehmen dürfen alle Personen, die das Quiz aufrufen und das Pseudonymfeld ausfüllen. Es besteht keine Verpflichtung zur Angabe personenbezogener Daten. Die Angabe des Pseudonyms ist erforderlich, um die Bonuspunktevergabe zu ermöglichen, wobei dieses Pseudonym bei Analyse der Daten nicht mit den tatsächlichen Identitäten der Teilnehmenden verknüpft wird.</p>
-      <p><strong>3. Zweck des Quiz</strong></p>
-      <p>Das Quiz dient der Erhebung anonymisierter Nutzungs- und Antwortdaten für wissenschaftliche Zwecke. Es werden keine individuellen Bewertungen erstellt, keine personenbezogenen Rückschlüsse gezogen und keine kommerziellen Absichten verfolgt.</p>
-      <p><strong>4. Freiwillige Datenübermittlung</strong></p>
-      <p>Am Ende des Quiz besteht die Möglichkeit, eine CSV-Datei mit den eigenen Antworten und begleitenden Daten herunterzuladen. Die Weitergabe oder der Upload dieser Datei (z. B. auf eCampus oder andere Plattformen) ist freiwillig. Eine Übermittlung ist nur dann erforderlich, wenn die Teilnehmenden ausdrücklich mit der Auswertung ihrer Daten einverstanden sind. Ohne diese Übermittlung werden keine Daten vom Server verarbeitet oder gespeichert.</p>
-      <p><strong>5. Datennutzung und Anonymisierung</strong></p>
-      <p>Die erfassten Daten, einschließlich Quizantworten, Verweildauer auf Seiten, Klickverhalten, Modalöffnungen und Navigationsverläufen, werden ausschließlich anonymisiert gespeichert und analysiert. Vor der Auswertung wird das Pseudonym vollständig entfernt und somit eine nachträgliche Identifikation technisch verhindert. Weitere Informationen zur Datenverarbeitung finden Sie in der Datenschutzerklärung.</p>
-      <p><strong>6. Haftungsausschluss</strong></p>
-      <p>Für technische Störungen, Datenverluste oder fehlerhafte Darstellungen übernimmt der Anbieter keine Haftung. Die Teilnahme erfolgt auf eigenes Risiko.</p>
-      <p><strong>7. Änderung der AGB</strong></p>
-      <p>Diese AGB können jederzeit angepasst werden. Die jeweils aktuelle Version ist beim Einstieg in das Quiz einsehbar. Mit der Nutzung des Quiz erklärt sich die teilnehmende Person mit der jeweils gültigen Version einverstanden.</p>
-      <p><strong>8. Kontakt</strong></p>
-      <p>Für Rückfragen oder Anliegen zur Teilnahme und Datennutzung kann über die Email s6cestar@uni-bonn.de Kontakt aufgenommen werden.</p>
+        <p><strong>1. Scope</strong></p>
+        <p>These Terms and Conditions (AGB) apply to the use of the online quiz “Studiquiz”, provided for study and research purposes. Participation is voluntary.</p>
+        <p><strong>2. Conditions of Participation</strong></p>
+        <p>All individuals who access the quiz and fill in the pseudonym field may participate. There is no obligation to provide personal data. The pseudonym entry is required to enable the awarding of bonus points, but this pseudonym will not be linked to the actual identities of the participants during data analysis.</p>
+        <p><strong>3. Purpose of the Quiz</strong></p>
+        <p>The quiz serves to collect anonymized usage and response data for scientific purposes. No individual evaluations are created, no personal conclusions are drawn, and no commercial purposes are pursued.</p>
+        <p><strong>4. Voluntary Data Submission</strong></p>
+        <p>At the end of the quiz, participants may download a CSV file containing their own answers and accompanying data. Sharing or uploading this file (e.g., on eCampus or other platforms) is voluntary. Transmission is only required if participants explicitly agree to the analysis of their data. Without such transmission, no data will be processed or stored on the server.</p>
+        <p><strong>5. Data Usage and Anonymization</strong></p>
+        <p>The collected data, including quiz answers, time spent on pages, click behavior, modal openings, and navigation paths, will be stored and analyzed exclusively in anonymized form. Before analysis, the pseudonym is completely removed, preventing any subsequent identification. Further details on data processing can be found in the privacy policy.</p>
+        <p><strong>6. Disclaimer</strong></p>
+        <p>The provider assumes no liability for technical malfunctions, data loss, or incorrect displays. Participation is at one’s own risk.</p>
+        <p><strong>7. Changes to the Terms</strong></p>
+        <p>These Terms and Conditions may be modified at any time. The current version is available when starting the quiz. By using the quiz, participants agree to the applicable version.</p>
+        <p><strong>8. Contact</strong></p>
+        <p>For questions or concerns regarding participation and data usage, please contact: s6cestar@uni-bonn.de</p>
       </div>
     </div>
   </div>
-
-  <!-- Datenschutz Modal -->
+  
+  <!-- Privacy Policy Modal -->
   <div id="datenschutzModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dsTitle">
-  <div class="modal-content scrollable">
-    <button id="closeDatenschutzModal" class="close" aria-label="Datenschutz schließen">&times;</button>
-    <h2 id="dsTitle">Privacy policy</h2>
-    <div class="modal-text">
-      <p><strong>1. Verantwortlicher und Kontakt</strong></p>
-      <p>Verantwortlich für dieses Quiz ist: s6cestar@uni-bonn.de.</p>
-      <p>Fragen zum Datenschutz können an folgenden E-Mail-Adressen gerichtet werden: ortloff@cs.uni-bonn.de und s6cestar@uni-bonn.de .</p>
-      <p><strong>2. Arten der verarbeiteten Daten</strong></p>
-      <p>Dieses Quiz wird vollständig lokal im Browser ausgeführt. Es findet unsererseits keine aktive Datenübertragung an einen Server statt. Im Rahmen der Nutzung können folgende Informationen lokal gespeichert werden:</p>
-      <ul>
-        <li>Antworten auf die Quizfragen</li>
-        <li>Ein frei wählbares Pseudonym</li>
-        <li>Interaktionsverhalten mit einzelnen Elementen (z. B. Navigation, Modaleinblendungen)</li>
-        <li>Zustimmungsinformationen zu rechtlichen Hinweisen</li>
-        <li>Dauer zur Beantwortung einzelner Fragen</li>
-        <li>Freitextantworten</li>
-      </ul>
-
-      <p><strong>3. Zweck der Verarbeitung & Umgang</strong></p>
-      <p>Die Verarbeitung erfolgt zur Durchführung einer anonymisierten Auswertung zu wissenschaftlichen Zwecken. Ziel ist es, das technische Nutzungsverhalten und Antwortmuster zu untersuchen. Pseudonyme werden vor der Analyse entfernt. Eine Rückverfolgung auf Einzelpersonen erfolgt nicht. Forscher und Kursteilnehmer haben nur dann Zugang zu diesen Daten, wenn sie sich bereit erklären, die Vertraulichkeit der Daten zu wahren, und wenn sie den in diesem Dokument genannten Bedingungen zustimmen. In der Veröffentlichung oder Präsentation der Studie werden keine identifizierenden Informationen genannt.</p>
-
-      <p><strong>4. Kein Tracking, keine zentrale Speicherung</strong></p>
-      <p>IP-Adressen, Gerätekennungen oder andere Metadaten werden unsererseits nicht erhoben oder gespeichert. Siehe jedoch Github-Hosting für weitere Informationen.</p>
-
-      <p><strong>5. Optionale Datenweitergabe durch CSV-Export</strong></p>
-      <p>Nach Abschluss des Quiz kann auf Wunsch eine CSV-Datei mit den lokal gespeicherten Daten heruntergeladen werden. Diese Datei wird nicht automatisch versendet. Nur durch einen manuellen Upload (z. B. auf eCampus) erfolgt eine Weitergabe.</p>
-      <p>Mit dem freiwilligen Upload wird die Zustimmung zur anonymisierten Auswertung erteilt. Ohne Upload verbleiben alle Daten ausschließlich lokal. Nach einem Upload werden die Daten sowohl für die Lehre als auch für die Forschung verwendet. Wenn dir das bewusst ist, gib bitte bei der ersten Frage das Wort Eis ein.</p>
-
-      <p><strong>6. GitHub-Hosting</strong></p>
-      <p>Diese Website wird über GitHub Pages gehostet (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim Aufruf der Seite kann GitHub technische Zugriffsdaten wie IP-Adresse oder Zeitstempel verarbeiten. Diese Verarbeitung erfolgt unabhängig vom Quiz und liegt außerhalb unseres Einflussbereichs.</p>
-      <p>Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a></p>
-
-      <p><strong>7. Speicherdauer und Kontrolle</strong></p>
-      <p>Alle Daten verbleiben im lokalen Speicher Ihres Browsers und können dort jederzeit manuell gelöscht werden. Eine Speicherung findet vor Hochladen der CSV-Datei nicht statt. Die Daten werden in verschlüsselter Form gespeichert. Nach Hochladen der CSV-Datei kann durch Kontaktaufnahme jederzeit eine Löschung der Daten beantragt werden.</p>
-
-      <p><strong>8. Rechte der Nutzerinnen und Nutzer</strong></p>
-      <p>Es bestehen klassische Auskunfts- oder Löschansprüche. Die volle Kontrolle über die lokal gespeicherten Daten liegt bei Ihnen. Sie können diese jederzeit im Browser löschen oder den Export vermeiden.</p>
-
-      <p><strong>9. Keine Weitergabe an Dritte</strong></p>
-      <p>Die unsererseits gespeicherten oder exportierten Daten werden ausschließlich für wissenschaftliche Zwecke verwendet. Eine Weitergabe an Dritte oder kommerzielle Nutzung erfolgt nicht.</p>
-
-      <p><strong>10. Rechtsgrundlage</strong></p>
-      <p>Die Nutzung des Quiz und die freiwillige Weitergabe von Daten durch Export beruhen auf informierter Zustimmung. Es findet keine Erhebung personenbezogener Daten statt, daher ist keine zusätzliche Rechtsgrundlage erforderlich.</p>
+    <div class="modal-content scrollable">
+      <button id="closeDatenschutzModal" class="close" aria-label="Close Privacy Policy">&times;</button>
+      <h2 id="dsTitle">Privacy Policy</h2>
+      <div class="modal-text">
+        <p><strong>1. Responsible Party and Contact</strong></p>
+        <p>Responsible for this quiz: s6cestar@uni-bonn.de.</p>
+        <p>Questions about data protection can be directed to: ortloff@cs.uni-bonn.de and s6cestar@uni-bonn.de.</p>
+        <p><strong>2. Types of Data Processed</strong></p>
+        <p>This quiz runs entirely locally in the browser. We do not actively transfer any data to a server. During use, the following information may be stored locally:</p>
+        <ul>
+          <li>Answers to quiz questions</li>
+          <li>Stated field of study</li>
+          <li>Interaction behavior with individual elements (e.g., navigation, modal openings)</li>
+          <li>Consent information regarding legal notices</li>
+          <li>Time taken to answer individual questions</li>
+          <li>Free-text responses</li>
+        </ul>
+  
+        <p><strong>3. Purpose of Processing & Handling</strong></p>
+        <p>Processing is carried out for anonymized evaluation for scientific purposes. The goal is to study technical usage behavior and response patterns. Pseudonyms are removed before analysis. No tracing back to individuals occurs. Researchers and course participants only have access to these data if they agree to maintain confidentiality and accept the conditions stated in this document. No identifying information will be mentioned in publications or presentations.</p>
+  
+        <p><strong>4. No Tracking, No Central Storage</strong></p>
+        <p>We do not collect or store IP addresses, device identifiers, or other metadata. However, see GitHub hosting for further details.</p>
+  
+        <p><strong>5. Optional Data Sharing via CSV Export</strong></p>
+        <p>After completing the quiz, a CSV file containing the locally stored data can be downloaded. This file is not sent automatically. Only through manual upload (e.g., to eCampus) can it be shared.</p>
+        <p>By voluntarily uploading, you consent to anonymized analysis. Without upload, all data remain stored locally. After upload, the data will be used for both teaching and research. If you are aware of this, please enter the word "Eis" for the first question.</p>
+  
+        <p><strong>6. GitHub Hosting</strong></p>
+        <p>This website is hosted via GitHub Pages (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). When accessing the site, GitHub may process technical access data such as IP address or timestamps. This processing occurs independently of the quiz and is outside our control.</p>
+        <p>More information: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a></p>
+  
+        <p><strong>7. Storage Duration and Control</strong></p>
+        <p>All data remain stored locally in your browser and can be manually deleted at any time. No storage occurs before uploading the CSV file. The data are stored in encrypted form. After uploading the CSV file, data deletion can be requested at any time by contacting us.</p>
+  
+        <p><strong>8. User Rights</strong></p>
+        <p>Users retain classical rights of access and deletion. You have full control over locally stored data. You may delete them at any time in your browser or avoid exporting them.</p>
+  
+        <p><strong>9. No Disclosure to Third Parties</strong></p>
+        <p>The data we store or that are exported are used exclusively for scientific purposes. They are not shared with third parties nor used commercially.</p>
+  
+        <p><strong>10. Legal Basis</strong></p>
+        <p>The use of the quiz and the voluntary transfer of data via export are based on informed consent. No personal data are collected, therefore no additional legal basis is required.</p>
+      </div>
     </div>
   </div>
-</div>
 
   <script src="script.js"></script>
 </body>
