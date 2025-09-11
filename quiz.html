@@ -63,6 +63,7 @@
   </div>
 
   <script>
+    // --- Fragen-Array ---
     const fragen = [
       {
         frage: "If you own a PC/Laptop: What OS(Operating System) do you primarily use?",
@@ -72,7 +73,12 @@
       },
       {
         frage: "How would you estimate your technical affinity?",
-        antworten: ["Very high (I program regularly and am well-versed in systems)", "High (I have basic knowledge and interest in technology)", "Medium (I use technology but without in-depth knowledge)", "Low (I use technology only when necessary)"],
+        antworten: [
+          "Very high (I program regularly and am well-versed in systems)", 
+          "High (I have basic knowledge and interest in technology)", 
+          "Medium (I use technology but without in-depth knowledge)", 
+          "Low (I use technology only when necessary)"
+        ],
         mehrfach: false
       },
       {
@@ -171,77 +177,81 @@
         mehrfach: false
       }
     ];
-
+  
+    // --- Variablen ---
     let aktuelleFrage = 0;
     const frageContainer = document.getElementById("frageContainer");
     const zurueck = document.getElementById("zurueck");
     const weiter = document.getElementById("weiter");
     const abschliessen = document.getElementById("abschliessen");
     const dankeContainer = document.getElementById("dankeContainer");
-
+  
     let daten = JSON.parse(localStorage.getItem("uniQuizDaten")) || {};
-    const pseudonym = daten.kuerzel || "Kein Pseudonym gefunden";
     if (!daten.quizAntworten) daten.quizAntworten = [];
-
-function zeigeFrage() {
-  const f = fragen[aktuelleFrage];
-
-  if (aktuelleFrage === 0) {
-    frageContainer.innerHTML = `
-      <p><strong>${f.frage}</strong></p>
-      <p>Frage 1 von ${fragen.length}</p>
-      <input type="text" id="freitextAntwort" maxlength="30" placeholder="Antwort eingeben..." style="width: 100%; padding: 0.5em;" />
-    `;
-
-    const vorherigeAntwort = daten.quizAntworten[0];
-    if (vorherigeAntwort) {
-      document.getElementById("freitextAntwort").value = vorherigeAntwort;
-    }
-  } else {
-    frageContainer.innerHTML = `
-      <p><strong>${f.frage}</strong></p>
-      <p>Frage ${aktuelleFrage + 1} von ${fragen.length}</p>
-      ` +
-      f.antworten.map((antwort, i) => `
-        <div><input type="${f.mehrfach ? 'checkbox' : 'radio'}" name="antwort" id="a${i}" value="${antwort}">
-        <label for="a${i}">${antwort}</label></div>
-      `).join('');
-
-    const vorherigeAntwort = daten.quizAntworten[aktuelleFrage];
-    if (vorherigeAntwort) {
-      if (Array.isArray(vorherigeAntwort)) {
-        vorherigeAntwort.forEach(a => {
-          const input = document.querySelector(`input[value='${a}']`);
-          if (input) input.checked = true;
-        });
+  
+    // --- Frage anzeigen ---
+    function zeigeFrage() {
+      const f = fragen[aktuelleFrage];
+  
+      if (aktuelleFrage === 0 && f.typ === "text") {
+        frageContainer.innerHTML = `
+          <p><strong>${f.frage}</strong></p>
+          <p>Frage 1 von ${fragen.length}</p>
+          <input type="text" id="freitextAntwort" maxlength="30" placeholder="Antwort eingeben..." style="width: 100%; padding: 0.5em;" />
+        `;
+  
+        if (daten.quizAntworten[0]) {
+          document.getElementById("freitextAntwort").value = daten.quizAntworten[0];
+        }
       } else {
-        const input = document.querySelector(`input[value='${vorherigeAntwort}']`);
-        if (input) input.checked = true;
+        frageContainer.innerHTML = `
+          <p><strong>${f.frage}</strong></p>
+          <p>Frage ${aktuelleFrage + 1} von ${fragen.length}</p>
+          ` + f.antworten.map((antwort, i) => `
+            <div>
+              <input type="${f.mehrfach ? 'checkbox' : 'radio'}" name="antwort" id="a${i}" value="${antwort}">
+              <label for="a${i}">${antwort}</label>
+            </div>
+          `).join('');
+  
+        const vorherigeAntwort = daten.quizAntworten[aktuelleFrage];
+        if (vorherigeAntwort) {
+          if (Array.isArray(vorherigeAntwort)) {
+            vorherigeAntwort.forEach(a => {
+              const input = document.querySelector(`input[value='${a}']`);
+              if (input) input.checked = true;
+            });
+          } else {
+            const input = document.querySelector(`input[value='${vorherigeAntwort}']`);
+            if (input) input.checked = true;
+          }
+        }
       }
+  
+      zurueck.disabled = aktuelleFrage === 0;
+      weiter.classList.toggle("hidden", aktuelleFrage === fragen.length - 1);
+      abschliessen.classList.toggle("hidden", aktuelleFrage !== fragen.length - 1);
     }
-  }
-
-  zurueck.disabled = aktuelleFrage === 0;
-  weiter.classList.toggle("hidden", aktuelleFrage === fragen.length - 1);
-  abschliessen.classList.toggle("hidden", aktuelleFrage !== fragen.length - 1);
-}
-
-function speichereAntwort() {
-  const f = fragen[aktuelleFrage];
-  let antwort;
-
-  if (aktuelleFrage === 0) {
-    antwort = document.getElementById("freitextAntwort").value.trim();
-  } else if (f.mehrfach) {
-    antwort = Array.from(document.querySelectorAll("input[name='antwort']:checked")).map(i => i.value);
-  } else {
-    const selected = document.querySelector("input[name='antwort']:checked");
-    antwort = selected ? selected.value : null;
-  }
-
-  daten.quizAntworten[aktuelleFrage] = antwort;
-  localStorage.setItem("uniQuizDaten", JSON.stringify(daten));
-}
+  
+    // --- Antwort speichern ---
+    function speichereAntwort() {
+      const f = fragen[aktuelleFrage];
+      let antwort;
+  
+      if (aktuelleFrage === 0 && f.typ === "text") {
+        antwort = document.getElementById("freitextAntwort").value.trim();
+      } else if (f.mehrfach) {
+        antwort = Array.from(document.querySelectorAll("input[name='antwort']:checked")).map(i => i.value);
+      } else {
+        const selected = document.querySelector("input[name='antwort']:checked");
+        antwort = selected ? selected.value : null;
+      }
+  
+      daten.quizAntworten[aktuelleFrage] = antwort;
+      localStorage.setItem("uniQuizDaten", JSON.stringify(daten));
+    }
+  
+    // --- Navigation ---
     zurueck.addEventListener("click", () => {
       speichereAntwort();
       if (aktuelleFrage > 0) {
@@ -249,7 +259,7 @@ function speichereAntwort() {
         zeigeFrage();
       }
     });
-
+  
     weiter.addEventListener("click", () => {
       speichereAntwort();
       if (aktuelleFrage < fragen.length - 1) {
@@ -257,77 +267,29 @@ function speichereAntwort() {
         zeigeFrage();
       }
     });
-
+  
     abschliessen.addEventListener("click", () => {
-      speichereAntwort(); // Letzte Antwort sichern
+      speichereAntwort();
       frageContainer.classList.add("hidden");
       document.querySelector(".navigation").classList.add("hidden");
       dankeContainer.classList.remove("hidden");
     });
-
-    //CSV Download mit Einverständnis
-    document.getElementById("csvDownloadBtn").addEventListener("click", () => {
+  
+    // --- CSV Download ---
+    function downloadCSV(consent = true) {
       const quizData = JSON.parse(localStorage.getItem("uniQuizDaten")) || {};
       const antworten = quizData.quizAntworten || [];
-
+  
       const csvHeaders = [
         "consent",
-        "A_R",
-        "A_V(s)",
-        "A_C",
-        "D_R",
-        "D_V(s)",
-        "D_C",
-        ...antworten.map((_, i) => `Frage ${i + 1}`),
-        "Pseudonym" //Pseudonym am Ende falls Sonderzeichen nächste Spalte etc.
-      ];
-
-      const csvRow = [
-        "true", // true consent 
-        quizData.agbGelesen || false,
-        quizData.agbVerweildauer || 0,
-        quizData.agbAkzeptiertAm || "",
-        quizData.datenschutzGelesen || false,
-        quizData.datenschutzVerweildauer || 0,
-        quizData.datenschutzAkzeptiertAm || "",
-        ...antworten.map(a => Array.isArray(a) ? a.join(" | ") : a),
-        quizData.kuerzel || "" 
-        
-      ];
-
-      const csvContent = [csvHeaders.join(","), csvRow.join(",")].join("\n");
-
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      const rawKuerzel = quizData.kuerzel || "user";
-      const safeKuerzel = rawKuerzel.replace(/[^a-zA-Z0-9_-]/g, "_"); // ersetzt Sonderzeichen durch _
-      link.setAttribute("href", url);
-      link.setAttribute("download", `quiz_ergebnis_${safeKuerzel}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-
-    //CSV Download ohne Einverständnis zur Datenverbeitung
-    document.getElementById("csvDownloadNoConsentBtn").addEventListener("click", () => {
-      const quizData = JSON.parse(localStorage.getItem("uniQuizDaten")) || {};
-      const antworten = quizData.quizAntworten || [];
-    
-      const csvHeaders = [
-        "consent",
-        "A_R",
-        "A_V(s)",
-        "A_C",
-        "D_R",
-        "D_V(s)",
-        "D_C",
+        "A_R", "A_V(s)", "A_C",
+        "D_R", "D_V(s)", "D_C",
         ...antworten.map((_, i) => `Frage ${i + 1}`),
         "Pseudonym"
       ];
-    
+  
       const csvRow = [
-        "false", // consent = false
+        consent ? "true" : "false",
         quizData.agbGelesen || false,
         quizData.agbVerweildauer || 0,
         quizData.agbAkzeptiertAm || "",
@@ -337,23 +299,24 @@ function speichereAntwort() {
         ...antworten.map(a => Array.isArray(a) ? a.join(" | ") : a),
         quizData.kuerzel || ""
       ];
-    
+  
       const csvContent = [csvHeaders.join(","), csvRow.join(",")].join("\n");
-    
       const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
-      const rawKuerzel = quizData.kuerzel || "user";
-      const safeKuerzel = rawKuerzel.replace(/[^a-zA-Z0-9_-]/g, "_");
+      const safeKuerzel = (quizData.kuerzel || "user").replace(/[^a-zA-Z0-9_-]/g, "_");
       link.setAttribute("href", url);
-      link.setAttribute("download", `quiz_ergebnis_${safeKuerzel}_noConsent.csv`);
+      link.setAttribute("download", `quiz_ergebnis_${safeKuerzel}${consent ? "" : "_noConsent"}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    });
-
-    // Start: erste Frage anzeigen
-    document.addEventListener("DOMContentLoaded", zeigeFrage);
+    }
+  
+    document.getElementById("csvDownloadBtn").addEventListener("click", () => downloadCSV(true));
+    document.getElementById("csvDownloadNoConsentBtn").addEventListener("click", () => downloadCSV(false));
+  
+    // --- Erste Frage anzeigen ---
+    zeigeFrage();
   </script>
 </body>
 </html>
