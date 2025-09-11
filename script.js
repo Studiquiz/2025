@@ -85,6 +85,11 @@ closeAGBModal.addEventListener("click", () => {
     e.preventDefault(); // verhindert das automatische Abschicken
     const kuerzel = kuerzelInput.value.trim();
 
+    // Prüfen, ob ein Studienfach ausgewählt wurde
+    if (!kuerzel || kuerzel === "unselected") {
+      alert("Please select your field of study before starting the quiz.");
+      return; // Abbrechen, Quiz startet nicht
+    }
 
     const daten = JSON.parse(localStorage.getItem("uniQuizDaten")) || {};
     daten.kuerzel = kuerzel;
